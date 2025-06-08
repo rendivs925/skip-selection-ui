@@ -1,0 +1,17 @@
+
+@layer utilities {
+  .step-circle { @apply flex items-center justify-center rounded-full border transition-all relative; }
+  .step-circle-sm { @apply w-8 h-8; }
+  .step-circle-md { @apply w-9 h-9; }
+  .step-circle-lg { @apply w-10 h-10; }
+
+  .step-line { @apply absolute top-1/2 -translate-y-1/2 transition-colors; }
+  .step-line-horizontal { @apply h-[1px] right-[50%] w-full -z-10; }
+  .step-line-vertical { @apply w-[1px] bottom-[50%] h-full -z-10; }
+
+  .step-completed { @apply border-step-completed bg-step-completed/10 text-step-completed; }
+  .step-current { @apply border-step-current bg-step-current/10 text-step-current ring-2 ring-step-current/20; }
+  .step-upcoming { @apply border-step-upcoming bg-background text-step-upcoming; }
+
+  .step-interactive { @apply cursor-pointer hover:border-step-current/30 hover:bg-step-current/5 focus:outline-none focus:ring-2 focus:ring-step-current/20; }
+}
