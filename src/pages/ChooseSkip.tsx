@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import SkipList from "@/components/SkipList";
 import type { Skip } from "@/types/skip";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { calculateTotalWithVAT } from "@/utils/price";
+import SkipCarousel from "@/components/SkipCarousel";
 
 export default function ChooseSkip() {
   const [skips, setSkips] = useState<Skip[] | null>(null);
@@ -42,7 +42,7 @@ export default function ChooseSkip() {
             Select the skip size that best suits your needs
           </p>
         </div>
-        <SkipList
+        <SkipCarousel
           skips={skips}
           selectedId={selectedId}
           onSelect={(s) => setSelectedId(s.id)}
