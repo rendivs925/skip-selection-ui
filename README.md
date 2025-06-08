@@ -13,7 +13,7 @@ A responsive React (with TypeScript + TailwindCSS) interface for selecting skip 
 
 ## Tech Stack
 
-- React (Next.js or Vite-compatible)
+- React Vite
 - TailwindCSS
 - TypeScript
 - Lucide-react icons
@@ -23,20 +23,20 @@ A responsive React (with TypeScript + TailwindCSS) interface for selecting skip 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/skip-selection-ui.git
+git clone https://github.com/rendivs925/skip-selection-ui.git
 cd skip-selection-ui
 ```
 
 2. Install dependencies:
 
 ```bash
-pnpm install
+npm install
 ```
 
 3. Run the development server:
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 ## API Endpoint
