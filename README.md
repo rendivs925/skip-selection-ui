@@ -2,6 +2,10 @@
 
 A responsive React (with TypeScript + TailwindCSS) interface for selecting skip hire sizes. It fetches live data from an external API, allowing users to select the appropriate skip, view its details, and calculate total pricing with VAT included.
 
+## Demo
+
+https://github.com/user-attachments/assets/90e99993-603a-4bf3-803d-5213b474aefe
+
 ## Features
 
 - Responsive grid layout
