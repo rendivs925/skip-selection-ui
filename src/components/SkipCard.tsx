@@ -7,7 +7,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, Calendar, Truck } from "lucide-react";
+import { CheckCircle, XCircle, Calendar, Truck, Star, Zap } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { calculateTotalWithVAT, formatGBP } from "@/utils/price";
 import type { Skip } from "@/types/skip";
@@ -17,6 +17,8 @@ interface SkipCardProps {
   selected: boolean;
   onSelect: (skip: Skip) => void;
   loading?: boolean;
+  isRecommended?: boolean;
+  isPopular?: boolean;
 }
 
 export default function SkipCard({
@@ -24,6 +26,8 @@ export default function SkipCard({
   selected,
   onSelect,
   loading,
+  isRecommended = false,
+  isPopular = false,
 }: SkipCardProps) {
   if (loading || !skip) {
     return (
@@ -51,19 +55,37 @@ export default function SkipCard({
   return (
     <Card
       onClick={() => onSelect(skip)}
-      className={`border-2 p-0 cursor-pointer transition-all duration-300 overflow-hidden h-full flex flex-col ${
+      className={`border-2 p-0 cursor-pointer transition-all duration-300 overflow-hidden h-full flex flex-col relative ${
         selected
-          ? "border-primary ring-2 ring-primary/20 shadow-lg"
-          : "border-muted hover:border-primary/40 hover:shadow-md"
-      }`}
+          ? "border-primary ring-2 ring-primary/20 shadow-lg scale-[1.02]"
+          : "border-muted hover:border-primary/40 hover:shadow-md hover:scale-[1.01]"
+      } ${isRecommended ? "ring-2 ring-green-500/30 border-green-500" : ""}`}
       aria-selected={selected}
       role="option"
     >
+      {isRecommended && (
+        <div className="absolute top-2 left-2 z-10">
+          <Badge className="bg-green-600 hover:bg-green-700 text-white text-xs font-medium">
+            <Star className="w-3 h-3 mr-1" />
+            RECOMMENDED
+          </Badge>
+        </div>
+      )}
+
+      {isPopular && !isRecommended && (
+        <div className="absolute top-2 left-2 z-10">
+          <Badge className="bg-orange-600 hover:bg-orange-700 text-white text-xs font-medium">
+            <Zap className="w-3 h-3 mr-1" />
+            POPULAR
+          </Badge>
+        </div>
+      )}
+
       <div className="relative">
         <img
           src="/images/16-yarder-skip.jpg"
           alt={`${skip.size} Yard Skip`}
-          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-[1.01]"
+          className="w-full h-48 object-cover transition-transform duration-300"
         />
         <Badge className="absolute top-3 right-3 text-xs font-medium bg-primary/90 hover:bg-primary">
           {skip.size} YARD
@@ -79,8 +101,11 @@ export default function SkipCard({
         </CardTitle>
         <CardDescription className="mt-1 leading-snug text-muted-foreground">
           Perfect for{" "}
-          {skip.size <= 4 ? "small" : skip.size <= 8 ? "medium" : "large"}{" "}
-          projects
+          {skip.size <= 4
+            ? "small home projects"
+            : skip.size <= 8
+              ? "medium renovations"
+              : "large construction"}{" "}
         </CardDescription>
       </CardHeader>
 
@@ -93,7 +118,7 @@ export default function SkipCard({
         </div>
         <div className="flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-300">
           <Truck className="w-4 h-4 text-primary/70 shrink-0" />
-          <span className="leading-snug">Includes delivery & collection</span>
+          <span className="leading-snug">Free delivery & collection</span>
         </div>
         <div className="grid grid-cols-2 gap-2 mt-2 text-sm text-muted-foreground">
           <div className="flex items-center gap-2 transition-colors duration-300">

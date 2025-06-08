@@ -25,6 +25,16 @@ export default function SkipList({
       </div>
     ));
 
+  const sortedSkips = skips
+    ? [...skips].sort((a, b) => {
+        if (a.size === 6) return -1;
+        if (b.size === 6) return 1;
+        if (a.size === 4) return -1;
+        if (b.size === 4) return 1;
+        return a.size - b.size;
+      })
+    : [];
+
   return (
     <div
       className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -33,7 +43,7 @@ export default function SkipList({
     >
       {loading || !skips
         ? renderSkeletons()
-        : skips.map((skip, index) => (
+        : sortedSkips.map((skip, index) => (
             <div
               key={skip.id}
               className="animate-in fade-in slide-in-from-bottom-4 duration-500"
@@ -43,6 +53,8 @@ export default function SkipList({
                 skip={skip}
                 selected={skip.id === selectedId}
                 onSelect={onSelect}
+                isRecommended={skip.size === 6}
+                isPopular={skip.size === 4}
               />
             </div>
           ))}
